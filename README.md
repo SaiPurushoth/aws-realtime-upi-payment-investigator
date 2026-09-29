@@ -61,62 +61,12 @@ not poll Athena or S3 Tables.
 
 ## Architecture
 
-### Real-time investigation path
+![Real-Time UPI Payment Investigator architecture](assets/architecture.svg)
 
-```text
-Local synthetic producer / Streamlit controls
-                    |
-                    v
-Amazon Kinesis Data Streams: upi-payment-events
-                    |
-                    v
-Amazon Managed Service for Apache Flink
-Application: upi-payment-investigator
-                    |
-                    v
-Amazon Kinesis Data Streams: upi-investigations
-                    |
-                    v
-AWS Lambda: upi-investigator-trigger
-                    |
-                    v
-Amazon Bedrock AgentCore Runtime
-Strands agent: upi-payment-investigator
-                    |
-                    | get_transaction_evidence(transaction_id)
-                    v
-Amazon DynamoDB: upi-demo-transactions
-                    ^
-                    |
-Local Streamlit dashboard (live reads only)
-```
-
-### Parallel historical analytics path
-
-```text
-upi-payment-events
-    |
-    v
-Kinesis Streaming Tables
-    |
-    v
-Amazon S3 Tables / Apache Iceberg
-upi_demo.payment_events
-
-
-upi-investigations
-    |
-    v
-Kinesis Streaming Tables
-    |
-    v
-Amazon S3 Tables / Apache Iceberg
-upi_demo.investigation_events
-```
-
-The historical path is asynchronous audit and analytics storage only. It does
-not participate in payment detection, Lambda dispatch, AgentCore invocation, or
-the live dashboard.
+The upper lane is the real-time operational path. The lower lane independently
+archives both streams for historical audit and analytics. Historical delivery
+does not participate in payment detection, Lambda dispatch, AgentCore
+invocation, or live dashboard polling.
 
 ## Technical flow
 
@@ -412,6 +362,7 @@ or CloudFormation-generated suffixes so their names are globally unique.
 
 ```text
 .
+├── assets/                Architecture diagram used by this README
 ├── infra/                 Foundational CDK and historical delivery deployment
 │   └── historical/        Glue JSON schemas and Streaming Tables deploy script
 ├── simulator/             Synthetic two-scenario payment producer
