@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.agentcore.aws.dev/v1/agentcore.json",
+  "name": "UpIPaymentInvestigator",
+  "version": 1,
+  "managedBy": "CDK",
+  "tags": {
+    "agentcore:created-by": "agentcore-cli",
+    "agentcore:project-name": "UpIPaymentInvestigator"
+  },
+  "runtimes": [
+    {
+      "name": "upi_payment_investigator",
+      "build": "CodeZip",
+      "entrypoint": "main.py",
+      "codeLocation": "app/upi_payment_investigator/",
+      "runtimeVersion": "PYTHON_3_11",
+      "envVars": [
+        {
+          "name": "AWS_REGION",
+          "value": "us-east-1"
+        },
+        {
+          "name": "BEDROCK_MODEL_ID",
+          "value": "amazon.nova-lite-v1:0"
+        },
+        {
+          "name": "TABLE_NAME",
+          "value": "upi-demo-transactions"
+        }
+      ],
+      "networkMode": "PUBLIC",
+      "protocol": "HTTP",
+      "executionRoleArn": "arn:aws:iam::163856954803:role/AmazonBedrockAgentCoreUpiPaymentInvestigatorRuntimeRole"
+    }
+  ],
+  "memories": [],
+  "knowledgeBases": [],
+  "credentials": [],
+  "evaluators": [],
+  "onlineEvalConfigs": [],
+  "agentCoreGateways": [],
+  "policyEngines": [],
+  "configBundles": [],
+  "abTests": [],
+  "harnesses": [],
+  "datasets": [],
+  "capacityProviders": [],
+  "payments": []
+}

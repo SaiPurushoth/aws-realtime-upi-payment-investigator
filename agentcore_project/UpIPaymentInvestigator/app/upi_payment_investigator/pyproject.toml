@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "upi_payment_investigator"
+version = "0.1.0"
+description = "Minimal synthetic UPI payment investigator for AgentCore Runtime"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "aws-opentelemetry-distro ~= 0.18.0",
+    "bedrock-agentcore >= 1.24.0, < 2",
+    "boto3 >= 1.39.8, < 2",
+    "strands-agents >= 1.57.1, < 2",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]

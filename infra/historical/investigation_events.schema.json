@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Synthetic UPI Investigation Event",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "incident_id": { "type": "string" },
+    "transaction_id": { "type": "string" },
+    "incident_type": { "type": "string" },
+    "detected_at": { "type": "string", "format": "date-time" },
+    "amount": { "type": "number" },
+    "merchant_id": { "type": "string" },
+    "order_id": { "type": "string" },
+    "payer_debit_status": { "type": "string" },
+    "network_status": { "type": "string" },
+    "beneficiary_credit_status": { "type": "string" },
+    "merchant_callback_status": { "type": "string" },
+    "callback_http_status": { "type": "integer", "maximum": 2147483647 },
+    "error_code": { "type": "string" },
+    "error_message": { "type": "string" }
+  },
+  "required": [
+    "incident_id",
+    "transaction_id",
+    "incident_type",
+    "detected_at",
+    "amount",
+    "merchant_id",
+    "order_id",
+    "payer_debit_status",
+    "network_status",
+    "beneficiary_credit_status",
+    "merchant_callback_status",
+    "callback_http_status",
+    "error_code",
+    "error_message"
+  ]
+}

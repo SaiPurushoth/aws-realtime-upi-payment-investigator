@@ -1,0 +1,48 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadInvestigationStream",
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:DescribeStream",
+        "kinesis:DescribeStreamSummary",
+        "kinesis:GetRecords",
+        "kinesis:GetShardIterator",
+        "kinesis:ListShards",
+        "kinesis:SubscribeToShard"
+      ],
+      "Resource": "arn:aws:kinesis:us-east-1:163856954803:stream/upi-investigations"
+    },
+    {
+      "Sid": "InvokePaymentInvestigator",
+      "Effect": "Allow",
+      "Action": "bedrock-agentcore:InvokeAgentRuntime",
+      "Resource": [
+        "arn:aws:bedrock-agentcore:us-east-1:163856954803:runtime/UpIPaymentInvestigator_upi_payment_investigator-mI4LjW3s5e",
+        "arn:aws:bedrock-agentcore:us-east-1:163856954803:runtime/UpIPaymentInvestigator_upi_payment_investigator-mI4LjW3s5e/runtime-endpoint/DEFAULT"
+      ]
+    },
+    {
+      "Sid": "StoreInvestigationResult",
+      "Effect": "Allow",
+      "Action": "dynamodb:UpdateItem",
+      "Resource": "arn:aws:dynamodb:us-east-1:163856954803:table/upi-demo-transactions"
+    },
+    {
+      "Sid": "CreateFunctionLogGroup",
+      "Effect": "Allow",
+      "Action": "logs:CreateLogGroup",
+      "Resource": "arn:aws:logs:us-east-1:163856954803:log-group:/aws/lambda/upi-investigator-trigger"
+    },
+    {
+      "Sid": "WriteFunctionLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:us-east-1:163856954803:log-group:/aws/lambda/upi-investigator-trigger:log-stream:*"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeNovaLite",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": "arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-lite-v1:0"
+    },
+    {
+      "Sid": "ReadSyntheticTransactionEvidence",
+      "Effect": "Allow",
+      "Action": "dynamodb:GetItem",
+      "Resource": "arn:aws:dynamodb:us-east-1:163856954803:table/upi-demo-transactions"
+    },
+    {
+      "Sid": "CreateRuntimeLogGroup",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:DescribeLogStreams"
+      ],
+      "Resource": "arn:aws:logs:us-east-1:163856954803:log-group:/aws/bedrock-agentcore/runtimes/UpIPaymentInvestigator_upi_payment_investigator-mI4LjW3s5e-DEFAULT"
+    },
+    {
+      "Sid": "ConfigureRuntimeLogDelivery",
+      "Effect": "Allow",
+      "Action": "logs:PutResourcePolicy",
+      "Resource": "arn:aws:logs:us-east-1:163856954803:log-group:/aws/bedrock-agentcore/runtimes/UpIPaymentInvestigator_upi_payment_investigator-mI4LjW3s5e-DEFAULT"
+    },
+    {
+      "Sid": "DescribeRuntimeLogGroups",
+      "Effect": "Allow",
+      "Action": "logs:DescribeLogGroups",
+      "Resource": "*"
+    },
+    {
+      "Sid": "WriteRuntimeLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:us-east-1:163856954803:log-group:/aws/bedrock-agentcore/runtimes/UpIPaymentInvestigator_upi_payment_investigator-mI4LjW3s5e-DEFAULT:log-stream:*"
+    },
+    {
+      "Sid": "WriteRuntimeTraces",
+      "Effect": "Allow",
+      "Action": [
+        "xray:PutTraceSegments",
+        "xray:PutTelemetryRecords",
+        "xray:GetSamplingRules",
+        "xray:GetSamplingTargets"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "WriteRuntimeMetrics",
+      "Effect": "Allow",
+      "Action": "cloudwatch:PutMetricData",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "cloudwatch:namespace": "bedrock-agentcore"
+        }
+      }
+    }
+  ]
+}

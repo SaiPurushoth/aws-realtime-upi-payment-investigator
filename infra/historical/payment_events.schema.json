@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Synthetic UPI Payment Event",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "transaction_id": { "type": "string" },
+    "event_type": { "type": "string" },
+    "event_time": { "type": "string", "format": "date-time" },
+    "amount": { "type": "number" },
+    "merchant_id": { "type": "string" },
+    "order_id": { "type": "string" },
+    "status": { "type": "string" },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "synthetic": { "type": "boolean" },
+        "scenario": { "type": "string" },
+        "http_status": { "type": "integer", "maximum": 2147483647 },
+        "error": { "type": "string" }
+      },
+      "required": ["synthetic", "scenario"]
+    }
+  },
+  "required": [
+    "transaction_id",
+    "event_type",
+    "event_time",
+    "amount",
+    "merchant_id",
+    "order_id",
+    "status",
+    "metadata"
+  ]
+}

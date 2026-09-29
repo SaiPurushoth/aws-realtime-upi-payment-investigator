@@ -1,0 +1,17 @@
+{
+  "targets": {
+    "demo": {
+      "resources": {
+        "runtimes": {
+          "upi_payment_investigator": {
+            "runtimeId": "UpIPaymentInvestigator_upi_payment_investigator-mI4LjW3s5e",
+            "runtimeArn": "arn:aws:bedrock-agentcore:us-east-1:163856954803:runtime/UpIPaymentInvestigator_upi_payment_investigator-mI4LjW3s5e",
+            "roleArn": "arn:aws:iam::163856954803:role/AmazonBedrockAgentCoreUpiPaymentInvestigatorRuntimeRole"
+          }
+        },
+        "stackName": "AgentCore-UpIPaymentInvestigator-demo",
+        "deployHash": "f4a5c67ce5c4fd6b"
+      }
+    }
+  }
+}
